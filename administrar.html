@@ -17,7 +17,6 @@
 </head>
 
 <body class="bg-dark">
-    <script src="JavaScript.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -42,20 +41,99 @@
                 <li class="nav-item active">
                     <a class="nav-link mr-2" href="administrar.html">Administrar</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-2" href="">Registrarse</a>
-                </li>
             </ul>
         </div>
     </nav>
 
+    <section class="container">
+        <div class="row d-flex justify-content-between my-3">
+            <h3 class="text-success">Administrar Heladeria</h3>
+            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+        </div>
+        <hr>
+
+        <h3 class=" text-center text-success mb-4">Tabla De Peliculas y Series</h3>
+
+        <div class="table-responsive-sm mb-5">
+            <table class="table table-striped table-sm" id="tabla">
+                <thead>
+                    <tr class="text-light">
+                        <th scope="col">#</th>
+                        <th scope="col">Sabor</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo sabor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Codigo</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="Ingrese un codigo">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Sabor</label>
+                            <input type="text" class="form-control" id="sabor" placeholder="Ingrese un sabor">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Descripcion</label>
+                            <input type="text" class="form-control" id="descripcion"
+                                placeholder="Ingrese una descripcion">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">imagen</label>
+                            <input type="text" class="form-control" id="imagen"
+                                placeholder="Ingrese un nombre de imagen">
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregar()">Guardar cambios</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <footer>
-        <a href=""><i class="fa fa-facebook-square" aria-hidden="true"></i>Facebook</a>
-        <a href="">Instagram</a>
-        <a href="">Twitter</a>
-        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        <div class="pt-3 d-flex justify-content-end ">
+            <a class="text-primary medidaItems" href=""><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+            <a class="text-danger medidaItems" href=""><i class="fa fa-youtube" aria-hidden="true"></i></a>
+            <a class="tetxt-primary medidaItems" href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        </div>
+        <div class="text-center py-2 mt-5">
+            <p class="text-light">&copy;PABLIX ENTRETEIMIENTO. DERECHOS DEL AUTOR RESERVADOS. </p>
+        </div>
     </footer>
 
+    <script src="JSAdministrar.js"></script>
 </body>
 
 </html>

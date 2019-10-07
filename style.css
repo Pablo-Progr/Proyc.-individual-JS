@@ -10,3 +10,19 @@
 .letra{
     font-family: 'Acme', sans-serif;
 }
+
+.colorFondo{
+    background-color: rgb(24, 22, 22);
+}
+
+nav{
+    background-color: black;
+}
+
+footer{
+    background-color: black;
+}
+
+footer .medidaItems{
+    width: 300px;
+}

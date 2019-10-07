@@ -16,7 +16,7 @@
     <title>Pablix</title>
 </head>
 
-<body class="bg-dark">
+<body class="colorFondo">
     <script src="JavaScript.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -28,7 +28,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <p class="text-success font h1 my-2 mx-5 ">Pablix</p>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +43,58 @@
                     <a class="nav-link mr-2" href="administrar.html">Administrar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-2" href="">Registrarse</a>
+                    <a class="nav-link mr-2" href="" data-toggle="modal" data-target="#exampleModal">Registrarse</a>
                 </li>
             </ul>
         </div>
     </nav>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo sabor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Codigo</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="Ingrese un codigo">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Sabor</label>
+                            <input type="text" class="form-control" id="sabor" placeholder="Ingrese un sabor">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Descripcion</label>
+                            <input type="text" class="form-control" id="descripcion"
+                                placeholder="Ingrese una descripcion">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">imagen</label>
+                            <input type="text" class="form-control" id="imagen"
+                                placeholder="Ingrese un nombre de imagen">
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregar()">Guardar cambios</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section>
         <div class="carousel slide ">
@@ -55,13 +102,11 @@
             <div class="card-img-overlay pr-5 detalles">
                 <h1 class="text-light text-center my-5 letra display-4" id="fontVikings">V i k i n g s</h1>
                 <div class="mt-5 text-center">
-                    <a class="btn btn-success text-light" href="error.html"><i class="fa fa-play mr-2"
+                    <a class="btn btn-success text-light " href="error.html"><i class="fa fa-play mr-2"
                             aria-hidden="true"></i>
                         Reproducir</a>
-                    <a class="btn btn-success text-light"><i class="fa fa-list-ul mr-2"
+                    <a class="btn btn-success text-light "><i class="fa fa-list-ul mr-2"
                             aria-hidden="true"></i>Episodios</a>
-                    <a class="btn btn-success text-light"><i class="fa fa-question mr-2"
-                            aria-hidden="true"></i>Informacion</a>
                 </div>
                 <p class="text-light text-center mx-5 my-5">Está basada en las leyendas sobre las aventuras del vikingo
                     Ragnar Lodbrok, uno de los héroes más famosos de la cultura nórdica, un vikingo agricultor que
@@ -74,7 +119,29 @@
 
     <h2 class="text-success my-5 ml-5">Peliculas</h2>
 
-    <section class="container my-5 ">
+    <section class="container-fluid my-5 ">
+        <div class="row">
+            <div class="col-lg-3 w-100">
+                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
+            </div>
+            <div class="col-lg-3 w-100">
+                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
+            </div>
+            <div class="col-lg-3 w-100">
+                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
+            </div>
+            <div class="col-lg-3 w-100">
+                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
+            </div>
+        </div>
+        <div class="container my-4 d-flex justify-content-center">
+            <button class="btn btn-success"><i class="fa fa-chevron-down " aria-hidden="true"></i></button>
+        </div>
+    </section>
+
+    <h2 class="text-success my-5 ml-5">Series</h2>
+
+    <section class="container-fluid my-5 ">
         <div class="row">
             <div class="col-lg-3">
                 <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
@@ -91,9 +158,9 @@
         </div>
     </section>
 
-    <h2 class="text-success my-5 ml-5">Peliculas</h2>
+    <h2 class="text-success my-5 ml-5">Trilers</h2>
 
-    <section class="container my-5 ">
+    <section class="container-fluid my-5 ">
         <div class="row">
             <div class="col-lg-3">
                 <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
@@ -109,25 +176,17 @@
             </div>
         </div>
     </section>
-
-    <h2 class="text-success my-5 ml-5">Peliculas</h2>
-
-    <section class="container my-5 ">
-        <div class="row">
-            <div class="col-lg-3">
-                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
-            </div>
-            <div class="col-lg-3">
-                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
-            </div>
-            <div class="col-lg-3">
-                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
-            </div>
-            <div class="col-lg-3">
-                <img src="/Img/CatPelicula.jpg" class="w-100" alt="">
-            </div>
+ 
+    <footer>
+        <div class="pt-3 d-flex justify-content-end ">
+            <a class="text-primary medidaItems" href=""><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+            <a class="text-danger medidaItems" href=""><i class="fa fa-youtube" aria-hidden="true"></i></a>
+            <a class="tetxt-primary medidaItems" href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
         </div>
-    </section>
+        <div class="text-center py-2 mt-5">
+            <p class="text-light">&copy;PABLIX ENTRETEIMIENTO. DERECHOS DEL AUTOR RESERVADOS. </p>
+        </div>
+    </footer>
 
 </body>
 
