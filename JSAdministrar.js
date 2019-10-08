@@ -1,20 +1,37 @@
-class helado{
-    constructor(codigo,sabor,descripcion,imagen){
+/*class helado{
+    constructor(codigo,sabor,descripcion,){
         this.codigo = codigo;
         this.sabor = sabor;
         this.descripcion = descripcion;
         this.imagen = imagen;
     }
+}*/
+
+class pelicula {
+    constructor(codigo, categoria, descripcion,publicado,opcion) {
+        this.codigo = codigo;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.publicado = publicado;
+        this.opcion = opcion
+    }
 }
 
-var listaHelados = [];
+/*var listaHelados = [];
+leer();*/
+
+var listaPeliculas = [];
 leer();
 
-if(localStorage.length > 0 && listaHelados.length == 0){
+/*if(localStorage.length > 0 && listaHelados.length == 0){
     listaHelados = JSON.parse(localStorage.getItem("heladoKey"));
+}*/
+
+if (localStorage.length > 0 && listaPeliculas.length == 0) {
+    listaPeliculas = JSON.parse(localStorage.getItem("peliculasKey"));
 }
 
-function agregar(){
+/*function agregar(){
     //Obterner Todos Los Datos En El Formulario
     let codigo = document.getElementById("codigo").value;
     let sabor = document.getElementById("sabor").value;
@@ -32,16 +49,37 @@ function agregar(){
 
     //Llamo A Leer Para Que Se Dibuje En La Tabla El Nuevo Helado
     leer();
+}*/
+
+function agregar() {
+    let codigo = document.getElementById("codigo").value;
+    let pelicula = document.getElementById("pelicula").value;
+    let categoria = document.getElementById("categoria").value;
+    let descripcion = document.getElementById("descripcion").value;
+
+    let peliculaItem = new films (codigo, pelicula, categoria, descripcion)
+
+    listaPeliculas.push(peliculaItem);
+
+    localStorage.setItem("peliculaKey", JSON.stringify(listaPeliculas));
+
+    leer();
 }
 
-function leer(){
+/*function leer(){
     //Traer Arreglo Del LocalStorage
     let arregloAux = JSON.parse(localStorage.getItem("heladoKey"));
     
     dibujarTabla(arregloAux);
+}*/
+
+function leer() {
+    let arregloAux = JSON.parse(localStorage.getItem("peliculaKey"));
+
+    dibujarTabla(arregloAux);
 }
 
-function dibujarTabla(arregloAux1){
+/*function dibujarTabla(arregloAux1){
     //Voy A Recorrer Cada Objeto De Mi ArregloAux
     borrarTabla();
     for(index in arregloAux1){
@@ -59,6 +97,7 @@ function dibujarTabla(arregloAux1){
         let celadaBotones = document.createElement("td");
         let botonEliminar = document.createElement("button");
         let botonModificar = document.createElement("button");
+        let botonFavorito = document.createElement("button");
 
         //Agregar Valores A Las Celdas
         celdaCodigo.innerText = arregloAux1[index].codigo;
@@ -67,6 +106,7 @@ function dibujarTabla(arregloAux1){
         celdaImagen.innerText = arregloAux1[index].imagen;
         botonEliminar.innerText = "";
         botonModificar.innerText = "";
+        botonFavorito.innerText = "";
 
         //Greagar Al Boton Eliminar En La Propieda Id El Codigo
         botonEliminar.id = arregloAux1[index].codigo;
@@ -76,12 +116,17 @@ function dibujarTabla(arregloAux1){
         botonModificar.id = arregloAux1[index].codigo;
         botonModificar.addEventListener("click",modificar);
 
+        botonFavorito.id = arregloAux1[index].codigo;
+        botonFavorito.addEventListener("click",favorito)
+
         botonEliminar.className = "fa fa-trash btn btn-success";
-        botonModificar.className = "fa fa-exchange ml-3 btn btn-success"
+        botonModificar.className = "fa fa-pencil-square-o ml-3 btn btn-success"
+        botonFavorito.className = "fa fa-star btn btn-success ml-3"
 
         //Unir Padres Con Sus Hijos
         celadaBotones.appendChild(botonEliminar);
         celadaBotones.appendChild(botonModificar);
+        celadaBotones.appendChild(botonFavorito);
         fila.appendChild(celdaCodigo);
         fila.appendChild(celdaSabor);
         fila.appendChild(celdaDescripcion);
@@ -96,47 +141,107 @@ function dibujarTabla(arregloAux1){
 
     }
 
+}*/
+
+function dibujarTabla(arregloAux1) {
+    borrarTabla();
+
+    for (index in arregloAux1) {
+        console.log(arregloAux1[index].codigo);
+        console.log(arregloAux1[index].pelicula);
+        console.log(arregloAux1[index].categoria);
+        console.log(arregloAux1[index].descripcion);
+
+        let fila = document.createElement("tr");
+        let celdaCodigo = document.createElement("td");
+        let celdaPelicula = document.createElement("td");
+        let celdaCategoria = document.createElement("td");
+        let celdaDescripcion = document.createElement("td");
+        let celdaPublicado = document.createElement("td");
+        let botonCheckbox = document.createElement("checkbox")
+        let celadaBotones = document.createElement("td");
+        let botonEliminar = document.createElement("button");
+        let botonModificar = document.createElement("button");
+        let botonFavorito = document.createElement("button");
+
+        celdaCodigo.innerText = arregloAux1[index].codigo;
+        celdaPelicula.innerText = arregloAux1[index].pelicula;
+        celdaCategoria.innerText = arregloAux1[index].categoria;
+        celdaDescripcion.innerText = arregloAux1[index].descripcion;
+        botonCheckbox.innerText = arregloAux1[index].publicado;
+        botonEliminar.innerText = "";
+        botonModificar.innerText = "";
+        botonFavorito.innerText = "";
+
+        botonEliminar.id = arregloAux1[index].codigo;
+        botonEliminar.addEventListener("click",eliminar);
+
+        botonModificar.id = arregloAux1[index].codigo;
+        botonModificar.addEventListener("click",modificar);
+
+        botonFavorito.id = arregloAux1[index].codigo;
+        botonFavorito.addEventListener("click",favorito)
+
+        botonEliminar.className = "fa fa-trash btn btn-success";
+        botonModificar.className = "fa fa-pencil-square-o ml-3 btn btn-success";
+        botonFavorito.className = "fa fa-star btn btn-success ml-3";
+
+        celadaBotones.appendChild(botonEliminar);
+        celadaBotones.appendChild(botonModificar);
+        celadaBotones.appendChild(botonFavorito);
+        celdaPublicado.appendChild(botonCheckbox);
+        fila.appendChild(celdaCodigo);
+        fila.appendChild(celdaPelicula);
+        fila.appendChild(celdaCategoria);
+        fila.appendChild(celdaDescripcion);
+        fila.appendChild(celdaPublicado);
+        fila.appendChild(celadaBotones);
+
+        let tbody = document.getElementById("tbody");
+        tbody.appendChild(fila);
+        tbody.className="text-light";
+    }
 }
 
-function borrarTabla(){
+function borrarTabla() {
     let tbody = document.getElementById("tbody");
     //Mientras Tbody Tenga Hijos
-    if(tbody.children.length > 0){
+    if (tbody.children.length > 0) {
         //Mientras Exista El Primer Hijos
-        while(tbody.firstChild){
-             tbody.removeChild(tbody.firstChild);
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
         }
     }
 }
 
-function eliminar(){
+function eliminar() {
     console.log(this.id)
-  let arreglo = JSON.parse(localStorage.getItem("heladoKey"));
-  let codigo = this.id;
-  
-  //Quitar Del Arreglo El Helado Que Tenga El ThisId
+    let arreglo = JSON.parse(localStorage.getItem("heladoKey"));
+    let codigo = this.id;
 
-  let arregloNuevo = arreglo.filter(function(helado){
-      return helado.codigo != codigo;
-  })
+    //Quitar Del Arreglo El Helado Que Tenga El ThisId
 
-  //Ahora Guardo El Nuevo Arreglo
-  localStorage.setItem("heladoKey",JSON.stringify(arregloNuevo));
+    let arregloNuevo = arreglo.filter(function (helado) {
+        return helado.codigo != codigo;
+    })
 
-  leer(); 
+    //Ahora Guardo El Nuevo Arreglo
+    localStorage.setItem("heladoKey", JSON.stringify(arregloNuevo));
+
+    leer();
 }
 
 
-function modificar(){
-   // let ventanaModal = document.getElementById("exampleModal");
-    
+function modificar() {
+    // let ventanaModal = document.getElementById("exampleModal");
+
     $("#exampleModal").modal("show");
     let arreglo = JSON.parse(localStorage.getItem("heladoKey"));
     let codigo = this.id;
-    
+
     //Quitar Del Arreglo El Helado Que Tenga El ThisId
-  
-    let arregloNuevo = arreglo.filter(function(helado){
+
+    let arregloNuevo = arreglo.filter(function (helado) {
         return helado.codigo == codigo;
     })
 
