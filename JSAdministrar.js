@@ -57,7 +57,7 @@ function agregar() {
     let categoria = document.getElementById("categoria").value;
     let descripcion = document.getElementById("descripcion").value;
 
-    let peliculaItem = new films (codigo, pelicula, categoria, descripcion)
+    let peliculaItem = new pelicula(codigo,pelicula,categoria,descripcion);
 
     listaPeliculas.push(peliculaItem);
 
@@ -157,8 +157,7 @@ function dibujarTabla(arregloAux1) {
         let celdaPelicula = document.createElement("td");
         let celdaCategoria = document.createElement("td");
         let celdaDescripcion = document.createElement("td");
-        let celdaPublicado = document.createElement("td");
-        let botonCheckbox = document.createElement("checkbox")
+        let celdaCheckbox = document.createElement("input");
         let celadaBotones = document.createElement("td");
         let botonEliminar = document.createElement("button");
         let botonModificar = document.createElement("button");
@@ -168,7 +167,6 @@ function dibujarTabla(arregloAux1) {
         celdaPelicula.innerText = arregloAux1[index].pelicula;
         celdaCategoria.innerText = arregloAux1[index].categoria;
         celdaDescripcion.innerText = arregloAux1[index].descripcion;
-        botonCheckbox.innerText = arregloAux1[index].publicado;
         botonEliminar.innerText = "";
         botonModificar.innerText = "";
         botonFavorito.innerText = "";
@@ -180,7 +178,9 @@ function dibujarTabla(arregloAux1) {
         botonModificar.addEventListener("click",modificar);
 
         botonFavorito.id = arregloAux1[index].codigo;
-        botonFavorito.addEventListener("click",favorito)
+        botonFavorito.addEventListener("click",favorito);
+
+        celdaCheckbox.setAttribute("type","checkbox");
 
         botonEliminar.className = "fa fa-trash btn btn-success";
         botonModificar.className = "fa fa-pencil-square-o ml-3 btn btn-success";
@@ -189,12 +189,12 @@ function dibujarTabla(arregloAux1) {
         celadaBotones.appendChild(botonEliminar);
         celadaBotones.appendChild(botonModificar);
         celadaBotones.appendChild(botonFavorito);
-        celdaPublicado.appendChild(botonCheckbox);
+        checkbox.appendChild(botonCheckbox);
         fila.appendChild(celdaCodigo);
         fila.appendChild(celdaPelicula);
         fila.appendChild(celdaCategoria);
         fila.appendChild(celdaDescripcion);
-        fila.appendChild(celdaPublicado);
+        fila.appendChild(checkbox);
         fila.appendChild(celadaBotones);
 
         let tbody = document.getElementById("tbody");
@@ -203,7 +203,7 @@ function dibujarTabla(arregloAux1) {
     }
 }
 
-function borrarTabla() {
+/*function borrarTabla() {
     let tbody = document.getElementById("tbody");
     //Mientras Tbody Tenga Hijos
     if (tbody.children.length > 0) {
@@ -212,9 +212,21 @@ function borrarTabla() {
             tbody.removeChild(tbody.firstChild);
         }
     }
+}*/
+
+function borrarTabla(){
+    let tbody = document.getElementById("tbody");
+
+    if(tbody.children.length > 0){
+
+        while(tbody.firstChild){
+            tbody.removeChild(tbody.firstChild);
+        }
+    }
 }
 
-function eliminar() {
+
+/*function eliminar() {
     console.log(this.id)
     let arreglo = JSON.parse(localStorage.getItem("heladoKey"));
     let codigo = this.id;
@@ -229,10 +241,19 @@ function eliminar() {
     localStorage.setItem("heladoKey", JSON.stringify(arregloNuevo));
 
     leer();
+}*/
+
+function eliminar(){
+    console.log(this.id)
+    let arreglo = JSON.parse(localStorage.getItem("peliculaKey"));
+    let codigo = this.id;
+
+    let arregloNuevo = arreglo.filter(function(helado){
+        return pelicula.codigo != codigo;
+    })
 }
 
-
-function modificar() {
+/*function modificar() {
     // let ventanaModal = document.getElementById("exampleModal");
 
     $("#exampleModal").modal("show");
@@ -247,4 +268,17 @@ function modificar() {
 
     document.getElementById("sabor").value = arregloNuevo[0].sabor;
 
+}*/
+
+
+function modificar(){
+    $("#exampleModal").modal("show");
+    let Arreglo = JSON.parse(localStorage.getItem("peliculaKey"));
+    let codigo = this.id;
+
+    let arregloNuevo = arreglo.filter(function(helado){
+        return pelicula.codigo == codigo;
+    })
+
+    document.getElementById("pelicula").value = arregloNuevo[0].pelicula;
 }
