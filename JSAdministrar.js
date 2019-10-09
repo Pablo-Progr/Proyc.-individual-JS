@@ -7,13 +7,14 @@
     }
 }*/
 
-class pelicula {
-    constructor(codigo, categoria, descripcion,publicado,opcion) {
+class Peliculas{
+    constructor(codigo,pelicula, categoria, descripcion,publicado,opcion) {
         this.codigo = codigo;
+        this.pelicula = pelicula
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.publicado = publicado;
-        this.opcion = opcion
+        this.opcion = opcion;
     }
 }
 
@@ -28,7 +29,7 @@ leer();
 }*/
 
 if (localStorage.length > 0 && listaPeliculas.length == 0) {
-    listaPeliculas = JSON.parse(localStorage.getItem("peliculasKey"));
+    listaPeliculas = JSON.parse(localStorage.getItem("peliculaKey"));
 }
 
 /*function agregar(){
@@ -57,8 +58,10 @@ function agregar() {
     let categoria = document.getElementById("categoria").value;
     let descripcion = document.getElementById("descripcion").value;
 
-    let peliculaItem = new pelicula(codigo,pelicula,categoria,descripcion);
-
+    let peliculaItem = new Peliculas(codigo,pelicula,categoria,descripcion,"","");
+    
+    console.log(peliculaItem);
+    console.log(listaPeliculas);
     listaPeliculas.push(peliculaItem);
 
     localStorage.setItem("peliculaKey", JSON.stringify(listaPeliculas));
@@ -157,8 +160,10 @@ function dibujarTabla(arregloAux1) {
         let celdaPelicula = document.createElement("td");
         let celdaCategoria = document.createElement("td");
         let celdaDescripcion = document.createElement("td");
-        let celdaCheckbox = document.createElement("input");
+        let celdaCheckbox = document.createElement("td");
+        let checkbox = document.createElement("input");
         let celadaBotones = document.createElement("td");
+        celadaBotones.className = "d-flex"
         let botonEliminar = document.createElement("button");
         let botonModificar = document.createElement("button");
         let botonFavorito = document.createElement("button");
@@ -180,21 +185,21 @@ function dibujarTabla(arregloAux1) {
         botonFavorito.id = arregloAux1[index].codigo;
         botonFavorito.addEventListener("click",favorito);
 
-        celdaCheckbox.setAttribute("type","checkbox");
+        checkbox.type = "checkbox";
 
         botonEliminar.className = "fa fa-trash btn btn-success";
-        botonModificar.className = "fa fa-pencil-square-o ml-3 btn btn-success";
-        botonFavorito.className = "fa fa-star btn btn-success ml-3";
+        botonModificar.className = "fa fa-pencil-square-o btn btn-success ml-2";
+        botonFavorito.className = "fa fa-star btn btn-success ml-2";
 
         celadaBotones.appendChild(botonEliminar);
         celadaBotones.appendChild(botonModificar);
         celadaBotones.appendChild(botonFavorito);
-        checkbox.appendChild(botonCheckbox);
+        celdaCheckbox.appendChild(checkbox);
         fila.appendChild(celdaCodigo);
         fila.appendChild(celdaPelicula);
         fila.appendChild(celdaCategoria);
         fila.appendChild(celdaDescripcion);
-        fila.appendChild(checkbox);
+        fila.appendChild(celdaCheckbox);
         fila.appendChild(celadaBotones);
 
         let tbody = document.getElementById("tbody");
@@ -244,13 +249,17 @@ function borrarTabla(){
 }*/
 
 function eliminar(){
-    console.log(this.id)
+    console.log(this.id,"hhooo") 
     let arreglo = JSON.parse(localStorage.getItem("peliculaKey"));
     let codigo = this.id;
 
-    let arregloNuevo = arreglo.filter(function(helado){
+    let arregloNuevo = arreglo.filter(function(pelicula){
         return pelicula.codigo != codigo;
     })
+
+    localStorage.setItem("peliculaKey", JSON.stringify(arregloNuevo));
+
+    leer();
 }
 
 /*function modificar() {
@@ -273,12 +282,16 @@ function eliminar(){
 
 function modificar(){
     $("#exampleModal").modal("show");
-    let Arreglo = JSON.parse(localStorage.getItem("peliculaKey"));
+    let arreglo = JSON.parse(localStorage.getItem("peliculaKey"));
     let codigo = this.id;
 
-    let arregloNuevo = arreglo.filter(function(helado){
+    let arregloNuevo = arreglo.filter(function(pelicula){
         return pelicula.codigo == codigo;
     })
 
     document.getElementById("pelicula").value = arregloNuevo[0].pelicula;
+}
+
+function favorito(){
+
 }

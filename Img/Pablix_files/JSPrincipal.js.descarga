@@ -1,0 +1,13 @@
+function verMas(){
+
+  var elemento = document.getElementById("segundaFila");
+
+  if(document.getElementById("boton").className == "fa fa-chevron-down")
+  {
+    elemento.className = "visible row mt-5";
+    document.getElementById("boton").className = "fa fa-chevron-up";
+  } else{
+    elemento.className = "ocultar";
+    document.getElementById("boton").className ="fa fa-chevron-down";
+  }
+}
